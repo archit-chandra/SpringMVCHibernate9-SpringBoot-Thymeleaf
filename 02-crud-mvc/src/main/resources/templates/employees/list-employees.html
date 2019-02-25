@@ -44,10 +44,25 @@
                             </a>
                         </td>-->
                         <td>
-                            <form action="#" th:action="@{/employees/showFormForUpdate}" method="post">
-                                <input type="hidden" name="employeeId" th:value="${employee.id}"/>
-                                <button type="submit" class="btn btn-info btn-sm">Update</button>
-                            </form>
+                            <div class="row">
+                                <div class="col-small">
+                                    <!-- Add "update" button/link -->
+                                    <form action="#" th:action="@{/employees/showFormForUpdate}" method="post">
+                                        <input type="hidden" name="employeeId" th:value="${employee.id}"/>
+                                        <button type="submit" class="btn btn-info btn-sm">Update</button>
+                                    </form>
+                                </div>
+                                <div class="col-small">
+                                    <!--Add delete button/link-->
+                                    <form action="#" th:action="@{/employees/delete}" method="post">
+                                        <input type="hidden" name="employeeId" th:value="${employee.id}"/>
+                                        <button type="submit" class="btn btn-danger btn-sm"
+                                                onclick="if (!(confirm('Are you sure?'))) return false;">
+                                            Delete
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 </tbody>
