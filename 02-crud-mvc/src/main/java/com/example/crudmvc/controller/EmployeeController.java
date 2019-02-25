@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.crudmvc.entity.Employee;
 import com.example.crudmvc.service.EmployeeService;
@@ -43,5 +44,16 @@ public class EmployeeController {
     public String saveEmployee(@ModelAttribute("employee") Employee employee) {
         employeeService.saveEmployee(employee);
         return "redirect:/employees/list";
+    }
+
+    @PostMapping("/showFormForUpdate")
+    public String showFormForUpdate(@RequestParam("employeeId") int id,
+                                    Model model) {
+        // get employee from the service
+        Employee employee = employeeService.getEmployeeById(id);
+        // set employee as model attribute to pre-populate the form
+        model.addAttribute("employee", employee);
+        // send over to the employee-form
+        return "/employees/employee-form";
     }
 }
